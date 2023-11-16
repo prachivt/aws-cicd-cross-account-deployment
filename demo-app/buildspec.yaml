@@ -12,12 +12,12 @@ phases:
       - echo Building the Docker image... 
       - docker build -t anycompany-test .
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - docker tag anycompany-test:latest 576393599494.dkr.ecr.us-east-1.amazonaws.com/anycompany-test:$IMAGE_TAG
+      - docker tag demo-app:latest 12345678910.dkr.ecr.us-east-1.amazonaws.com/demo-app:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 576393599494.dkr.ecr.us-east-1.amazonaws.com/anycompany-test:$IMAGE_TAG
+      - docker push 12345678910.dkr.ecr.us-east-1.amazonaws.com/demo-app:$IMAGE_TAG
       - printf '{"ImageURI":"%s"}' $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imageDetail.json
       - cat imageDetail.json
 artifacts:
