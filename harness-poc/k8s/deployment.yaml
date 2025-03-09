@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harness-poc
+  namespace: harness-poc-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harness-poc
+  template:
+    metadata:
+      labels:
+        app: harness-poc
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
